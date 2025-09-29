@@ -1,0 +1,6 @@
+numpy
+torch
+faiss-cpu==1.6.4
+tqdm
+transformers==4.51.0
+vllm==0.8.2
