@@ -1,0 +1,45 @@
+### model
+model_name_or_path: [SFT Checkpoint]
+trust_remote_code: true
+
+### method
+stage: dpo
+do_train: true
+finetuning_type: full
+deepspeed: examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
+pref_beta: 0.1
+pref_loss: sigmoid  # choices: [sigmoid (dpo), orpo, simpo]
+pref_ftx: 0.2
+
+### dataset
+dataset: rag_1.5b_dpo
+template: qwen
+cutoff_len: 2200
+max_samples: 60000
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+### output
+output_dir: saves/full/qwen_1.5b_dpo_lr8e-7_beta0.1_pref0.5
+logging_steps: 5
+save_steps: 0.5
+# save_strategy: epoch
+save_only_model: true
+plot_loss: true
+overwrite_output_dir: true
+
+### train
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 2
+learning_rate: 8.0e-7
+num_train_epochs: 1.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.05
+bf16: true
+ddp_timeout: 180000000
+
+#@# eval
+val_size: 0.01
+per_device_eval_batch_size: 2
+eval_strategy: steps
+eval_steps: 50

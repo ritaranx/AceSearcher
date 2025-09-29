@@ -168,6 +168,9 @@ prompt = tokenizer.apply_chat_template(message, tokenize=False, add_generation_p
 output = llm.generate(prompt, sampling_params)[0].outputs[0].text
 ```
 
+## Training
+We use [Llama-Factory](https://github.com/hiyouga/LLaMA-Factory/) codebase for both SFT and RFT (mDPO) finetuning. Please see `config` folder for the example configs used.
+
 ## Reference
 If you find this work useful, consider citing it. Thank you in advance:
 ```
